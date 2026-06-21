@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: homarr
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/Luiz-H3nrique/homelab-k8s.git'
+    targetRevision: HEAD
+    path: apps/homarr           # Aponta para os manifestos reais do Homarr
+  destination:
+    server: 'https://default.svc'
+    namespace: homarr
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

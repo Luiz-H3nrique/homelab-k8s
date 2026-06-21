@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root-application
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/Luiz-H3nrique/homelab-k8s.git'
+    targetRevision: HEAD
+    path: bootstrap             # O segredo está aqui: monitorar a pasta bootstrap
+  destination:
+    server: 'https://default.svc'
+    namespace: argocd           # Aplica as sub-aplicações dentro do próprio Argo CD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
