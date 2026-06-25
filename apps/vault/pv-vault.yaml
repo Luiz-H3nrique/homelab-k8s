@@ -7,16 +7,17 @@ spec:
     storage: 10Gi
   volumeMode: Filesystem
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: local-storage # Força o mesmo nome usado no PVC automático do Vault
-  local:
-    path: /mnt/storage/vault # Pasta física no nó
+  storageClassName: local-storage
+  hostPath:
+    path: /mnt/storage/vault
+    type: DirectoryOrCreate  
   nodeAffinity:
     required:
       nodeSelectorTerms:
-      - matchExpressions:
-        - key: kubernetes.io/hostname
-          operator: In
-          values:
-          - NOME_DO_SEU_NO # Coloque o nome do nó onde a pasta foi criada
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - homelab-pc
