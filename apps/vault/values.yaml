@@ -1,6 +1,12 @@
 server:
   dev:
     enabled: false
+
+  securityContext:
+    runAsUser: 100
+    runAsGroup: 1000
+    fsGroup: 1000
+    
   dataStorage:
     enabled: true
     size: 10Gi
