@@ -1,0 +1,10 @@
+server:
+  dev:
+    enabled: false
+  dataStorage:
+    enabled: true
+    size: 10Gi
+  ui:
+    enabled: true
+    serviceType: "NodePort"
+    nodePort: 30082

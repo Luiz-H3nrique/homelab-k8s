@@ -3,3 +3,5 @@ kind: Kustomization
 
 resources:
   - homarr-app.yaml
+  - vault-app.yaml
+  - external-secrets-app.yaml
