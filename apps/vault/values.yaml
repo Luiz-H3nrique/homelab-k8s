@@ -2,19 +2,23 @@ server:
   dev:
     enabled: false
 
-  extraInitContainers:
-    - name: fix-permissions
-      image: busybox:latest
-      command: ["sh", "-c", "mkdir -p /vault/data && chown -R 100:1000 /vault/data && chmod -R 750 /vault/data"]
-      volumeMounts:
-        - name: data
-          mountPath: /vault/data
-
+ 
   dataStorage:
     enabled: true
     size: 10Gi
     storageClass: "local-storage"
+
+  
+  service:
+    type: NodePort
+    nodePort: 30082
+
+  
+  securityContext:
+    runAsUser: 100
+    runAsGroup: 1000
+    fsGroup: 1000
+
+
   ui:
     enabled: true
-    serviceType: "NodePort"
-    nodePort: 30082
