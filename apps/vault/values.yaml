@@ -4,6 +4,7 @@ server:
   dataStorage:
     enabled: true
     size: 10Gi
+    storageClass: "local-storage"
   ui:
     enabled: true
     serviceType: "NodePort"
